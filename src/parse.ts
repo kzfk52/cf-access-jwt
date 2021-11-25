@@ -1,6 +1,6 @@
-import { decodeJwt } from './decode.js';
-import { DecodedJwt, JwtParseResult } from './types.js';
-import { verifyJwtSignature } from './verify.js';
+import { decodeJwt } from "./decode.js";
+import { DecodedJwt, JwtParseResult } from "./types.js";
+import { verifyJwtSignature } from "./verify.js";
 
 /**
  * Parse a JWT.
@@ -16,29 +16,23 @@ export async function parseJwt(
   } catch {
     return { valid: false, reason: `Unable to decode JWT.` };
   }
-  if (decoded.header.typ !== 'JWT') {
+  if (decoded.header.alg !== "RS256") {
     return {
       valid: false,
-      reason: `Invalid JWT type "${decoded.header.typ}". Expected "JWT".`
+      reason: `Invalid JWT algorithm "${decoded.header.alg}". Expected "RS256".`,
     };
   }
-  if (decoded.header.alg !== 'RS256') {
+  if (decoded.payload.aud !== audience && decoded.payload.aud[0] !== audience) {
     return {
       valid: false,
-      reason: `Invalid JWT algorithm "${decoded.header.alg}". Expected "RS256".`
-    };
-  }
-  if (decoded.payload.aud !== audience) {
-    return {
-      valid: false,
-      reason: `Invalid JWT audience "${decoded.payload.aud}". Expected "${audience}".`
+      reason: `Invalid JWT audience "${decoded.payload.aud}". Expected "${audience}".`,
     };
   }
   const iss = new URL(decoded.payload.iss);
   if (iss.origin !== issuerOrigin) {
     return {
       valid: false,
-      reason: `Invalid JWT issuer "${decoded.payload.iss}". Expected "${issuerOrigin}".`
+      reason: `Invalid JWT issuer "${decoded.payload.iss}". Expected "${issuerOrigin}".`,
     };
   }
   const expiryDate = new Date(0);
@@ -48,7 +42,7 @@ export async function parseJwt(
   if (expired) {
     return {
       valid: false,
-      reason: `JWT is expired. Expiry date: ${expiryDate}; Current date: ${currentDate};`
+      reason: `JWT is expired. Expiry date: ${expiryDate}; Current date: ${currentDate};`,
     };
   }
   let signatureValid: boolean;

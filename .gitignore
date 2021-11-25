@@ -6,8 +6,8 @@ node_modules
 dist
 *.tsbuildinfo
 
+.pnp.*
 .yarn/*
-!.yarn/cache
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases

@@ -22,7 +22,7 @@ export async function parseJwt(
       reason: `Invalid JWT algorithm "${decoded.header.alg}". Expected "RS256".`,
     };
   }
-  if (decoded.payload.aud !== audience && decoded.payload.aud[0] !== audience) {
+  if (!decoded.payload.aud && decoded.payload.aud[0] !== audience) {
     return {
       valid: false,
       reason: `Invalid JWT audience "${decoded.payload.aud}". Expected "${audience}".`,

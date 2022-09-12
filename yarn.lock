@@ -66,6 +66,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@kzfk52/cf-access-jwt@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@kzfk52/cf-access-jwt@workspace:."
+  dependencies:
+    "@cfworker/base64url": ^1.6.8
+    "@cfworker/dev": ^1.6.8
+    "@cfworker/worker-types": ^1.6.8
+    "@cloudflare/workers-types": ^2.1.0
+    "@types/chai": ^4.2.15
+    "@types/mocha": ^8.2.1
+    chai: ^4.3.0
+    mocha: ^8.3.0
+    rfc4648: ^1.5.2
+    typescript: ^4.5.2
+  languageName: unknown
+  linkType: soft
+
 "@npmcli/fs@npm:^1.0.0":
   version: 1.0.0
   resolution: "@npmcli/fs@npm:1.0.0"
@@ -85,22 +102,6 @@ __metadata:
   checksum: c96381d4a37448ea280951e46233f7e541058cf57a57d4094dd4bdcaae43fa5872b5f2eb6bfb004591a68e29c5877abe3cdc210cb3588cbf20ab2877f31a7de7
   languageName: node
   linkType: hard
-
-"@primarykids/cf-access-jwt@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@primarykids/cf-access-jwt@workspace:."
-  dependencies:
-    "@cfworker/base64url": ^1.6.8
-    "@cfworker/dev": ^1.6.8
-    "@cfworker/worker-types": ^1.6.8
-    "@cloudflare/workers-types": ^2.1.0
-    "@types/chai": ^4.2.15
-    "@types/mocha": ^8.2.1
-    chai: ^4.3.0
-    mocha: ^8.3.0
-    typescript: ^4.5.2
-  languageName: unknown
-  linkType: soft
 
 "@rollup/plugin-commonjs@npm:^18.0.0":
   version: 18.1.0
@@ -2200,6 +2201,13 @@ __metadata:
   version: 0.12.0
   resolution: "retry@npm:0.12.0"
   checksum: 623bd7d2e5119467ba66202d733ec3c2e2e26568074923bc0585b6b99db14f357e79bdedb63cab56cec47491c4a0da7e6021a7465ca6dc4f481d3898fdd3158c
+  languageName: node
+  linkType: hard
+
+"rfc4648@npm:^1.5.2":
+  version: 1.5.2
+  resolution: "rfc4648@npm:1.5.2"
+  checksum: bc3d9c4fbfdbbb363c640f9cb56fc01d2e1ca64305b2b6409aaf59cb85c1adecb2545c03deee8889cce2685e15fb7dd47581665c288e4f45068ffece2642f2e8
   languageName: node
   linkType: hard
 

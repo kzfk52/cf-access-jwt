@@ -8,6 +8,11 @@ Currently supports `alg:'RS256'` only.
 ```js
 const jwt = request.headers.get('Cf-Access-Jwt-Assertion');
 
+// CloudFlare Zero Team id
+const issuer = 'https://<your-team-name>.cloudflareaccess.com';
+// CloudFlare Zero Access Application : Overview tab : Application Audience (AUD) Tag
+const audience = 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa';
+
 const result = await parseJwt(jwt, issuer, audience);
 if (!result.valid) {
   console.log(result.reason); // Invalid issuer/audience, expired, etc

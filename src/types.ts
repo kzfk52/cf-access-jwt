@@ -1,13 +1,17 @@
 export interface JwtPayload {
   iss: string;
   sub: string;
-  aud: string;
+  aud: string[];
   iat: number;
   exp: number;
+  nbf: number;
+  email: string;
+  type: string;
+  identity_nonce: string;
 }
 
 export interface JwtHeader {
-  typ: string;
+  // typ: string;
   alg: string;
   kid: string;
 }
@@ -28,7 +32,7 @@ export interface RawJwt {
 export interface DecodedJwt {
   header: JwtHeader;
   payload: JwtPayload;
-  signature: string;
+  signature: Uint8Array;
   raw: RawJwt;
 }
 

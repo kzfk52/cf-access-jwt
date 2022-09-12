@@ -1,5 +1,5 @@
 {
-  "name": "@primarykids/cf-access-jwt",
+  "name": "@kzfk52/cf-access-jwt",
   "version": "1.0.0",
   "description": "Tiny lib for verifying Cloudflare Access JWTs.",
   "keywords": [
@@ -21,9 +21,9 @@
     "README.md",
     "package.json"
   ],
-  "repository": "https://github.com/PrimaryKids/cf-access-jwt",
-  "author": "Corey Psoinos <cpsoinos@primary.com>",
-  "homepage": "https://github.com/PrimaryKids/cf-access-jwt",
+  "repository": "https://github.com/kzfk52/cf-access-jwt",
+  "author": "Kazuyuki FUKUDA <10156602+kzfk@users.noreply.github.com>",
+  "homepage": "https://github.com/kzfk52/cf-access-jwt",
   "license": "MIT",
   "scripts": {
     "build": "tsc --build",

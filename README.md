@@ -1,3 +1,5 @@
+[![npm version](https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt.svg)](https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt)
+
 # cf-access-jwt
 
 Tiny lib for decoding Cloudflare Access JWTs and verifying signatures, using

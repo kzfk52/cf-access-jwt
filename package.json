@@ -1,6 +1,7 @@
 {
   "name": "@kzfk52/cf-access-jwt",
   "version": "1.0.1",
+  "type": "module",
   "description": "Tiny lib for verifying Cloudflare Access JWTs.",
   "keywords": [
     "jwt",
@@ -36,7 +37,7 @@
     "@cloudflare/workers-types": "^2.1.0"
   },
   "devDependencies": {
-    "@cfworker/dev": "^1.6.8",
+    "@cfworker/dev": "^1.14.1",
     "@types/chai": "^4.2.15",
     "@types/mocha": "^8.2.1",
     "chai": "^4.3.0",

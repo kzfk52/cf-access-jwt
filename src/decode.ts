@@ -1,6 +1,10 @@
-import { decode } from "@cfworker/base64url";
 import { DecodedJwt } from "./types.js";
 import { base64url } from "rfc4648";
+
+// from @cfworker/base64url/src/decode.js
+function decode(s: string): string {
+  return new TextDecoder().decode(base64url.parse(s, { loose: true }));
+}
 /**
  * Decode a JWT into header, payload, and signature components.
  */

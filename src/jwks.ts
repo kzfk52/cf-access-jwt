@@ -1,11 +1,11 @@
-import { DecodedJwt, JsonWebKeyset } from './types.js';
+import { DecodedJwt, JsonWebKeyset } from "./types.js";
 
 /**
  * Fetch a json web keyset.
  */
 export async function getJwks(issuer: string): Promise<JsonWebKeyset> {
   const url = new URL(issuer);
-  url.pathname = '/cdn-cgi/access/certs';
+  url.pathname = "/cdn-cgi/access/certs";
   const response = await fetch(url.href);
   if (!response.ok) {
     throw new Error(
@@ -24,21 +24,21 @@ const importedKeys: Record<string, Record<string, CryptoKey>> = {};
  */
 export async function importKey(iss: string, jwk: JsonWebKey) {
   const input = {
-    kty: 'RSA',
-    e: 'AQAB',
+    kty: jwk.kty || "RSA",
+    e: jwk.e || "AQAB",
     n: jwk.n,
-    alg: 'RS256',
-    ext: true
+    alg: jwk.alg || "RS256",
+    ext: true,
   };
   const key = await crypto.subtle.importKey(
-    'jwk',
+    "jwk",
     input,
-    { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+    { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
     false,
-    ['verify']
+    ["verify"]
   );
   importedKeys[iss] = importedKeys[iss] || {};
-  importedKeys[iss][jwk.kid || 'default'] = key;
+  importedKeys[iss][jwk.kid || "default"] = key;
 }
 
 /**
@@ -46,13 +46,13 @@ export async function importKey(iss: string, jwk: JsonWebKey) {
  */
 export async function getKey(decoded: DecodedJwt): Promise<CryptoKey> {
   let {
-    header: { kid = 'default' },
-    payload: { iss }
+    header: { kid = "default" },
+    payload: { iss },
   } = decoded;
 
   if (!importedKeys[iss]) {
     const jwks = await getJwks(iss);
-    await Promise.all(jwks.keys.map(jwk => importKey(iss, jwk)));
+    await Promise.all(jwks.keys.map((jwk) => importKey(iss, jwk)));
   }
 
   const key = importedKeys[iss][kid];

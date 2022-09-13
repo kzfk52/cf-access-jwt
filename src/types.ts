@@ -8,6 +8,7 @@ export interface JwtPayload {
   email: string;
   type: string;
   identity_nonce: string;
+  country: string;
 }
 
 export interface JwtHeader {

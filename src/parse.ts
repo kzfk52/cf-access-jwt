@@ -13,8 +13,11 @@ export async function parseJwt(
   let decoded: DecodedJwt;
   try {
     decoded = decodeJwt(encodedToken);
-  } catch {
-    return { valid: false, reason: `Unable to decode JWT.` };
+  } catch (exception) {
+    return {
+      valid: false,
+      reason: `Unable to decode JWT. exception: ${exception}`,
+    };
   }
   if (decoded.header.alg !== "RS256") {
     return {
@@ -22,7 +25,7 @@ export async function parseJwt(
       reason: `Invalid JWT algorithm "${decoded.header.alg}". Expected "RS256".`,
     };
   }
-  if (!decoded.payload.aud && decoded.payload.aud[0] !== audience) {
+  if (!decoded.payload.aud || decoded.payload.aud[0] !== audience) {
     return {
       valid: false,
       reason: `Invalid JWT audience "${decoded.payload.aud[0]}". Expected "${audience}".`,

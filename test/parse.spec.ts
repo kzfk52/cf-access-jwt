@@ -4,6 +4,7 @@ import { describe, it } from "mocha";
 import { importKey } from "../src/jwks.js";
 import { parseJwt } from "../src/parse.js";
 import { JwtHeader, JwtPayload } from "../src/types.js";
+import { base64url } from "rfc4648";
 
 const iss = "https://test.com";
 const aud = ["test-aud"];
@@ -14,6 +15,7 @@ const email = "example@example.com";
 const type = "app";
 const identity_nonce = "identity_nonce";
 const nbf = iat;
+const country = "US";
 
 describe("parseJwt", () => {
   it("parses a valid JWT", async () => {
@@ -29,10 +31,11 @@ describe("parseJwt", () => {
       type,
       identity_nonce,
       nbf,
+      country,
     };
     const jwt = await createJwt(header, payload);
     const result = await parseJwt(jwt, iss, aud[0]);
-    expect(result.valid).to.equal(true);
+    expect(result.valid, result.reason).to.equal(true);
   });
 
   it("rejects unexpected algorithm", async () => {
@@ -48,10 +51,11 @@ describe("parseJwt", () => {
       type,
       identity_nonce,
       nbf,
+      country,
     };
     const jwt = await createJwt(header, payload);
     const result = await parseJwt(jwt, iss, aud[0]);
-    expect(result.valid).to.equal(false);
+    expect(result.valid, result.reason).to.equal(false);
   });
 
   it("rejects invalid issuer", async () => {
@@ -67,10 +71,11 @@ describe("parseJwt", () => {
       type,
       identity_nonce,
       nbf,
+      country,
     };
     const jwt = await createJwt(header, payload);
     const result = await parseJwt(jwt, iss, aud[0]);
-    expect(result.valid).to.equal(false);
+    expect(result.valid, result.reason).to.equal(false);
   });
 
   it("rejects invalid audience", async () => {
@@ -86,10 +91,11 @@ describe("parseJwt", () => {
       type,
       identity_nonce,
       nbf,
+      country,
     };
     const jwt = await createJwt(header, payload);
     const result = await parseJwt(jwt, iss, aud[0]);
-    expect(result.valid).to.equal(false);
+    expect(result.valid, result.reason).to.equal(false);
   });
 
   it("rejects expired JWT", async () => {
@@ -105,10 +111,11 @@ describe("parseJwt", () => {
       type,
       identity_nonce,
       nbf,
+      country,
     };
     const jwt = await createJwt(header, payload);
     const result = await parseJwt(jwt, iss, aud[0]);
-    expect(result.valid).to.equal(false);
+    expect(result.valid, result.reason).to.equal(false);
   });
 });
 
@@ -131,7 +138,9 @@ async function createJwt(
     new TextEncoder().encode(data)
   );
 
-  return data + "." + btoa(String.fromCharCode(...new Uint8Array(signature)));
+  // base64url required. not base64.
+  // (There is no = padding at the end, + and / characters are replaced by - and _ respectively.)
+  return data + "." + base64url.stringify(new Uint8Array(signature));
 }
 
 async function generateKey() {

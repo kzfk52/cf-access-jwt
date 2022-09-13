@@ -1,6 +1,6 @@
 {
   "name": "@kzfk52/cf-access-jwt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "description": "Tiny lib for verifying Cloudflare Access JWTs.",
   "keywords": [

@@ -10,6 +10,8 @@ native crypto APIs.
 Currently supports `alg:'RS256'` only.
 
 ```js
+import { parseJwt } from '@kzfk52/cf-access-jwt';
+
 const jwt = request.headers.get('Cf-Access-Jwt-Assertion');
 
 // CloudFlare Zero Team id

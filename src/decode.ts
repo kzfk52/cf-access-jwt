@@ -1,4 +1,5 @@
-import { decode } from "@cfworker/base64url";
+import pkg from '@cfworker/base64url';
+const { decode } = pkg;
 import { DecodedJwt } from "./types.js";
 import { base64url } from "rfc4648";
 /**

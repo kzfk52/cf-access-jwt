@@ -1,4 +1,6 @@
-[![npm version](https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt.svg)](https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt)
+<p>
+  <a href="https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt"><img src="https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt.svg" alt="npm version" height="18"></a>
+</p>
 
 # cf-access-jwt
 

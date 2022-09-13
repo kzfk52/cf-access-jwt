@@ -1,5 +1,5 @@
 <p>
-  <a href="https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt"><img src="https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt.svg" alt="npm version" height="18"></a>
+  <a href="https://badge.fury.io/js/@kzfk52%2Fcf-access-jwt"><img src="https://badgen.net/npm/v/@kzfk52/cf-access-jwt" alt="npm version" height="18"></a>
 </p>
 
 # cf-access-jwt

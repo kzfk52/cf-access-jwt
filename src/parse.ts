@@ -25,7 +25,7 @@ export async function parseJwt(
   if (!decoded.payload.aud && decoded.payload.aud[0] !== audience) {
     return {
       valid: false,
-      reason: `Invalid JWT audience "${decoded.payload.aud}". Expected "${audience}".`,
+      reason: `Invalid JWT audience "${decoded.payload.aud[0]}". Expected "${audience}".`,
     };
   }
   const iss = new URL(decoded.payload.iss);

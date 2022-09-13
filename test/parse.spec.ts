@@ -6,54 +6,108 @@ import { parseJwt } from "../src/parse.js";
 import { JwtHeader, JwtPayload } from "../src/types.js";
 
 const iss = "https://test.com";
-const aud = "test-aud";
+const aud = ["test-aud"];
 const sub = "test-sub";
 const kid = "xyz";
 const iat = Math.floor(new Date().getTime() / 1000);
+const email = "example@example.com";
+const type = "app";
+const identity_nonce = "identity_nonce";
+const nbf = iat;
 
 describe("parseJwt", () => {
   it("parses a valid JWT", async () => {
     const exp = Math.floor(new Date().getTime() / 1000) + 10;
-    const header: JwtHeader = { alg: "RS256", typ: "JWT", kid };
-    const payload = { iss, aud, exp, sub, iat };
+    const header: JwtHeader = { alg: "RS256", kid };
+    const payload = {
+      iss,
+      aud,
+      exp,
+      sub,
+      iat,
+      email,
+      type,
+      identity_nonce,
+      nbf,
+    };
     const jwt = await createJwt(header, payload);
-    const result = await parseJwt(jwt, iss, aud);
+    const result = await parseJwt(jwt, iss, aud[0]);
     expect(result.valid).to.equal(true);
   });
 
   it("rejects unexpected algorithm", async () => {
     const exp = Math.floor(new Date().getTime() / 1000) + 10;
-    const header: JwtHeader = { alg: "HS256", typ: "JWT", kid };
-    const payload = { iss, aud, exp, sub, iat };
+    const header: JwtHeader = { alg: "HS256", kid };
+    const payload = {
+      iss,
+      aud,
+      exp,
+      sub,
+      iat,
+      email,
+      type,
+      identity_nonce,
+      nbf,
+    };
     const jwt = await createJwt(header, payload);
-    const result = await parseJwt(jwt, iss, aud);
+    const result = await parseJwt(jwt, iss, aud[0]);
     expect(result.valid).to.equal(false);
   });
 
   it("rejects invalid issuer", async () => {
     const exp = Math.floor(new Date().getTime() / 1000) + 60;
-    const header: JwtHeader = { alg: "RS256", typ: "JWT", kid };
-    const payload = { iss: "https://nefarious.com", aud, exp, sub, iat };
+    const header: JwtHeader = { alg: "RS256", kid };
+    const payload = {
+      iss: "https://nefarious.com",
+      aud,
+      exp,
+      sub,
+      iat,
+      email,
+      type,
+      identity_nonce,
+      nbf,
+    };
     const jwt = await createJwt(header, payload);
-    const result = await parseJwt(jwt, iss, aud);
+    const result = await parseJwt(jwt, iss, aud[0]);
     expect(result.valid).to.equal(false);
   });
 
   it("rejects invalid audience", async () => {
     const exp = Math.floor(new Date().getTime() / 1000) + 60;
-    const header: JwtHeader = { alg: "RS256", typ: "JWT", kid };
-    const payload = { iss, aud: "nefarious", exp, sub, iat };
+    const header: JwtHeader = { alg: "RS256", kid };
+    const payload = {
+      iss,
+      aud: ["nefarious"],
+      exp,
+      sub,
+      iat,
+      email,
+      type,
+      identity_nonce,
+      nbf,
+    };
     const jwt = await createJwt(header, payload);
-    const result = await parseJwt(jwt, iss, aud);
+    const result = await parseJwt(jwt, iss, aud[0]);
     expect(result.valid).to.equal(false);
   });
 
   it("rejects expired JWT", async () => {
     const exp = Math.floor(new Date().getTime() / 1000) - 60;
-    const header: JwtHeader = { alg: "RS256", typ: "JWT", kid };
-    const payload = { iss, aud, exp, sub, iat };
+    const header: JwtHeader = { alg: "RS256", kid };
+    const payload = {
+      iss,
+      aud,
+      exp,
+      sub,
+      iat,
+      email,
+      type,
+      identity_nonce,
+      nbf,
+    };
     const jwt = await createJwt(header, payload);
-    const result = await parseJwt(jwt, iss, aud);
+    const result = await parseJwt(jwt, iss, aud[0]);
     expect(result.valid).to.equal(false);
   });
 });
